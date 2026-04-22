@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perfiles Profesionales y Áreas de Interés Profesional MF</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sky:#E6F4FB;--sky2:#B8DFF2;--sky3:#6BBDE0;--sky4:#2196C9;--sky5:#0C5E8A;
+  --gr1:#E8F8EF;--gr2:#B2E8CB;--gr3:#3DBF7A;--gr4:#1A9155;--gr5:#0D5C35;
+  --white:#ffffff;--gray2:#E8EFF5;--gray3:#B0C4D4;--gray4:#5A7A8E;--gray5:#2C3E4A;
+}
+body{background:#F4F8FB;font-family:Arial,sans-serif;padding:16px}
+.app{padding:1rem 0;max-width:820px;margin:0 auto}
+.screen{display:none}.screen.active{display:block}
+.app-header{background:var(--sky4);border-radius:12px;padding:14px 20px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.app-header-logo{width:36px;height:36px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--sky4);flex-shrink:0}
+.app-header-title{font-size:15px;font-weight:700;color:#fff;margin:0;line-height:1.2}
+.app-header-sub{font-size:11px;color:#B8DFF2;margin:2px 0 0}
+h1{font-size:19px;font-weight:700;color:var(--sky5);margin-bottom:4px}
+h2{font-size:16px;font-weight:700;color:var(--sky5);margin-bottom:10px}
+h3{font-size:14px;font-weight:700;color:var(--sky5);margin-bottom:6px}
+p{font-size:13px;color:var(--gray4);line-height:1.6}
+.card{background:#fff;border:1px solid var(--sky2);border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px}
+.card-sky{background:var(--sky);border:1px solid var(--sky2);border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px}
+.card-green{background:var(--gr1);border:1px solid var(--gr2);border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px}
+button{cursor:pointer;font-family:Arial,sans-serif;font-size:13px;border-radius:8px;transition:opacity 0.15s}
+.btn{background:#fff;color:var(--sky4);border:1.5px solid var(--sky3);padding:8px 18px}
+.btn:hover{background:var(--sky)}
+.btn-primary{background:var(--sky4);color:#fff;border:none;padding:8px 18px;font-weight:600}
+.btn-primary:hover{opacity:0.88}
+.btn-green{background:var(--gr4);color:#fff;border:none;padding:8px 18px;font-weight:600}
+.btn-green:hover{opacity:0.88}
+.btn-white{background:#fff;color:var(--sky4);border:1.5px solid var(--sky2);padding:8px 18px}
+.btn-white:hover{background:var(--sky)}
+.btn-sm{padding:5px 12px;font-size:12px}
+.btn-danger{background:#fff;color:#e57373;border:1.5px solid #e57373;padding:5px 12px;font-size:12px}
+.btn-danger:hover{background:#fff5f5}
+.btn-active{background:#fff;color:var(--gr4);border:1.5px solid var(--gr3);padding:5px 12px;font-size:12px;font-weight:700}
+.btn-blocked{background:#fff;color:#e57373;border:1.5px solid #e57373;padding:5px 12px;font-size:12px;font-weight:700}
+.progress-bar{height:4px;background:var(--sky2);border-radius:2px;margin:6px 0 14px}
+.progress-fill-blue{height:4px;background:var(--sky4);border-radius:2px;transition:width 0.35s}
+.progress-bar-green{height:4px;background:var(--gr2);border-radius:2px;margin:6px 0 14px}
+.progress-fill-green{height:4px;background:var(--gr4);border-radius:2px;transition:width 0.35s}
+.step-row{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.step-pip{width:9px;height:9px;border-radius:50%;background:var(--sky2);flex-shrink:0}
+.step-pip.done{background:var(--sky3)}.step-pip.active{background:var(--sky4);width:11px;height:11px}.step-pip.green{background:var(--gr3)}
+.step-sep{width:16px;height:1px;background:var(--sky2)}.step-lbl{font-size:11px;color:var(--gray4)}
+.or-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--sky);cursor:pointer}
+.or-item:last-child{border-bottom:none}
+.or-num{font-size:11px;color:var(--gray3);min-width:22px;padding-top:2px}
+.or-txt{font-size:13px;color:var(--gray5);line-height:1.45;flex:1}
+.or-circle{width:19px;height:19px;border-radius:50%;border:2px solid var(--sky3);flex-shrink:0;margin-top:2px;transition:all 0.15s}
+.or-item.sel .or-circle{background:var(--sky4);border-color:var(--sky4)}
+.or-item.sel .or-txt{font-weight:600;color:var(--sky5)}
+.or-item:hover{background:var(--sky)}
+.rcols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(max-width:560px){.rcols{grid-template-columns:1fr 1fr}}
+.col-hdr{font-size:12px;font-weight:700;padding:5px 8px;border-radius:6px 6px 0 0;margin-bottom:3px;text-align:center;background:var(--sky4);color:#fff}
+.chk{display:flex;align-items:center;gap:7px;padding:6px 8px;border:1px solid var(--sky2);border-radius:7px;cursor:pointer;font-size:12px;color:var(--gray5);margin-bottom:3px}
+.chk:hover{background:var(--sky)}.chk.on{background:var(--sky);border-color:var(--sky3)}
+.chk-box{width:13px;height:13px;border:2px solid var(--sky3);border-radius:3px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.chk.on .chk-box{background:var(--sky4);border-color:var(--sky4)}
+.chk-mk{color:#fff;font-size:9px;font-weight:700;display:none}.chk.on .chk-mk{display:block}
+.badge{display:inline-flex;align-items:center;padding:3px 11px;border-radius:20px;font-size:12px;font-weight:700;margin:2px;background:var(--sky2);color:var(--sky5)}
+.badge-top{background:var(--sky4);color:#fff}.badge-k{background:var(--gr2);color:var(--gr5)}
+.sbar{margin:5px 0}
+.sbar-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px;color:var(--gray5)}
+.sbar-bg{height:8px;background:var(--sky);border-radius:4px}.sbar-bg-green{height:8px;background:var(--gr1);border-radius:4px}
+.sbar-fill{height:8px;border-radius:4px}
+.career-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--sky)}
+.career-item:last-child{border-bottom:none}
+.c-rank{font-size:11px;color:var(--gray3);min-width:20px;text-align:center;font-weight:700}
+.c-name{font-size:13px;color:var(--gray5);flex:1;font-weight:500}.c-inst{font-size:10px;color:var(--gray3)}
+.c-bar{height:5px;border-radius:3px;flex-shrink:0;background:var(--sky4)}
+.c-pct{font-size:11px;font-weight:700;color:var(--sky4);min-width:30px;text-align:right}
+.pdesc{font-size:12px;color:var(--gray4);line-height:1.65;margin-top:5px}
+.tab-bar{display:flex;gap:0;margin-bottom:12px;border-bottom:2px solid var(--sky2)}
+.tab{padding:7px 14px;font-size:13px;font-weight:600;color:var(--gray3);cursor:pointer;border-bottom:2.5px solid transparent;margin-bottom:-2px}
+.tab.on{color:var(--sky4);border-bottom-color:var(--sky4)}.tab:hover{color:var(--sky4)}
+.tab-green-bar{display:flex;gap:0;margin-bottom:12px;border-bottom:2px solid var(--gr2)}
+.tab-green{padding:7px 14px;font-size:13px;font-weight:600;color:var(--gray3);cursor:pointer;border-bottom:2.5px solid transparent;margin-bottom:-2px}
+.tab-green.on{color:var(--gr4);border-bottom-color:var(--gr4)}.tab-green:hover{color:var(--gr4)}
+.pat-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--sky);gap:10px;flex-wrap:wrap}
+.pat-row:last-child{border-bottom:none}
+.nav-row{display:flex;align-items:center;justify-content:space-between;margin-top:1.2rem;gap:10px}
+input[type=text],input[type=password]{width:100%;padding:10px 13px;border:1.5px solid var(--sky2);border-radius:9px;font-size:14px;font-family:Arial,sans-serif;background:#fff;color:var(--gray5)}
+input[type=text]:focus,input[type=password]:focus{outline:none;border-color:var(--sky4)}
+.empty{text-align:center;padding:1.5rem;color:var(--gray3);font-size:13px}
+.kuder-opt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1.5px solid var(--gr2);border-radius:9px;cursor:pointer;font-size:13px;color:var(--gray5);line-height:1.45;margin-bottom:6px;background:#fff;transition:all 0.15s}
+.kuder-opt:hover:not(.maxed):not(.sel){background:var(--gr1);border-color:var(--gr3)}
+.kuder-opt.sel{background:var(--gr3);border-color:var(--gr4);color:#fff}
+.kuder-opt.sel .k-num{color:rgba(255,255,255,0.7)}
+.kuder-opt.sel .k-circle{background:#fff;border-color:#fff}
+.kuder-opt.sel .k-check{display:flex}
+.kuder-opt.maxed{background:#F4F8FB;border-color:var(--gray2);color:var(--gray3);cursor:not-allowed;opacity:0.6}
+.kuder-opt.maxed .k-circle{border-color:var(--gray3)}
+.k-circle{width:20px;height:20px;border-radius:50%;border:2px solid var(--gr3);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.k-check{display:none;color:var(--gr5);font-size:12px;font-weight:900}
+.kuder-opt.sel .k-check{display:flex;color:var(--gr5)}
+.k-num{font-size:11px;color:var(--gr4);font-weight:700;min-width:18px;padding-top:1px;flex-shrink:0}
+.max-banner{background:var(--gr3);color:#fff;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px;margin-bottom:10px;display:none;align-items:center;gap:8px}
+.max-banner.show{display:flex}
+.warn-box{background:#FFF3E0;border:1px solid #FFB74D;border-radius:8px;color:#7A4500;font-size:12px;padding:7px 11px;margin-bottom:8px;display:none}
+.result-header{background:var(--sky);border:1px solid var(--sky2);border-radius:12px;padding:13px 16px;margin-bottom:12px}
+.result-header-green{background:var(--gr1);border:1px solid var(--gr2);border-radius:12px;padding:13px 16px;margin-bottom:12px}
+.highlight-card{border:2px solid var(--sky4);border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px;background:var(--sky)}
+.cruzado-pill{display:inline-block;background:var(--sky4);color:#fff;font-size:11px;font-weight:700;padding:3px 11px;border-radius:10px;margin-bottom:8px}
+.serie-header{background:var(--gr4);color:#fff;border-radius:8px;padding:8px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.serie-title{font-size:14px;font-weight:700}
+.sel-count{font-size:12px;background:rgba(255,255,255,0.25);padding:3px 10px;border-radius:10px;font-weight:700}
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
+.modal-box{background:#fff;border-radius:14px;padding:24px;max-width:360px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+.status-active{color:var(--gr4);font-weight:700;font-size:12px}
+.status-blocked{color:#e57373;font-weight:700;font-size:12px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="app-header">
+  <div class="app-header-logo">MF</div>
+  <div>
+    <p class="app-header-title">Perfiles Profesionales y Áreas de Interés Profesional MF</p>
+    <p class="app-header-sub">Orientación Vocacional · Santa Fe</p>
+  </div>
+</div>
+
+<!-- PANTALLA PACIENTE: solo ingreso de nombre -->
+<div id="s-home" class="screen active">
+  <div class="card">
+    <h3>Iniciar proceso</h3>
+    <p style="margin:6px 0 12px">Ingresá tu nombre completo para comenzar.</p>
+    <input type="text" id="nombre-input" placeholder="Nombre y apellido" autocomplete="off"/>
+    <div style="margin-top:10px"><button class="btn-primary" onclick="startTest()">Comenzar</button></div>
+  </div>
+  <div class="card-sky">
+    <div class="step-row">
+      <div class="step-pip active"></div><span class="step-lbl">Test de Perfiles Profesionales</span>
+      <div class="step-sep"></div><div class="step-pip"></div><span class="step-lbl">Resultados + Carreras</span>
+      <div class="step-sep"></div><div class="step-pip green"></div><span class="step-lbl">Escala de Áreas de Interés</span>
+      <div class="step-sep"></div><div class="step-pip green"></div><span class="step-lbl">Resultados + Carreras</span>
+      <div class="step-sep"></div><div class="step-pip"></div><span class="step-lbl">Ranking cruzado final</span>
+    </div>
+  </div>
+  <div style="margin-top:6px;text-align:right">
+    <button onclick="showAdminLogin()" style="background:none;border:none;font-size:11px;color:var(--gray3);cursor:pointer;padding:4px 8px">🔒 Admin</button>
+  </div>
+</div>
+
+<!-- PANEL ADMIN -->
+<div id="s-admin" class="screen">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+    <h2 style="margin:0">Panel de administración</h2>
+    <button class="btn btn-sm" onclick="cerrarAdmin()">Cerrar sesión</button>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+    <button class="btn-primary btn-sm" onclick="showAddPatient()">+ Agregar paciente</button>
+    <button class="btn btn-sm" onclick="exportAllPDF()">⬇ Descargar todos los PDF</button>
+  </div>
+  <div class="card" id="pat-list">
+    <div class="empty">Cargando pacientes...</div>
+  </div>
+</div>
+
+<!-- DETALLE PACIENTE (admin) -->
+<div id="s-detail" class="screen">
+  <button class="btn btn-sm" onclick="showScreen('s-admin');loadPatients()" style="margin-bottom:12px">← Volver al panel</button>
+  <h2 id="det-name">Paciente</h2>
+  <p id="det-fecha" style="font-size:11px;color:var(--gray3);margin-bottom:12px"></p>
+  <div class="tab-bar">
+    <div class="tab on" onclick="switchDetTab('dd-holland',this)">Perfiles</div>
+    <div class="tab" onclick="switchDetTab('dd-kuder',this)">Áreas de interés</div>
+    <div class="tab" onclick="switchDetTab('dd-cruzado',this)">Ranking cruzado</div>
+  </div>
+  <div id="dd-holland"><div id="det-h-content"></div></div>
+  <div id="dd-kuder" style="display:none"><div id="det-k-content"></div></div>
+  <div id="dd-cruzado" style="display:none"><div id="det-c-content"></div></div>
+  <div style="margin-top:1rem"><button class="btn-primary btn-sm" onclick="exportPDFFromDetail()">Exportar informe completo PDF</button></div>
+</div>
+
+
+<div id="s-p1" class="screen">
+  <p style="font-size:11px;color:var(--sky4);font-weight:600">Test de Perfiles Profesionales · Parte 1 de 2</p>
+  <div class="progress-bar"><div class="progress-fill-blue" id="p1-prog" style="width:8%"></div></div>
+  <h2 id="p1-ttl">Oraciones 1–30</h2>
+  <p id="p1-cnt" style="font-size:11px;color:var(--gray3);margin-bottom:8px"></p>
+  <div class="card" id="or-container"></div>
+  <div class="nav-row">
+    <button class="btn" id="p1-back" onclick="p1Back()">Atrás</button>
+    <button class="btn-primary" onclick="p1Next()">Continuar</button>
+  </div>
+</div>
+
+<div id="s-p2" class="screen">
+  <p style="font-size:11px;color:var(--sky4);font-weight:600">Test de Perfiles Profesionales · Parte 2 de 2</p>
+  <div class="progress-bar"><div class="progress-fill-blue" id="p2-prog" style="width:24%"></div></div>
+  <h2 id="p2-ttl">Fortalezas</h2>
+  <div id="p2-cont"></div>
+  <div class="nav-row">
+    <button class="btn" onclick="p2Back()">Atrás</button>
+    <button class="btn-primary" onclick="p2Next()">Continuar</button>
+  </div>
+</div>
+
+<div id="s-res-holland" class="screen">
+  <p style="font-size:11px;color:var(--sky4);font-weight:600">Paso 2 de 5 · Resultados — Test de Perfiles Profesionales</p>
+  <div class="progress-bar"><div class="progress-fill-blue" style="width:40%"></div></div>
+  <h2 id="rh-name">Perfil profesional</h2>
+  <div class="result-header">
+    <p style="font-size:11px;color:var(--sky4);margin-bottom:7px;font-weight:600">Perfil dominante</p>
+    <div id="rh-badges"></div>
+  </div>
+  <div class="tab-bar">
+    <div class="tab on" onclick="switchTab2('rh-perfil',this,'rh-carreras')">Perfil</div>
+    <div class="tab" onclick="switchTab2('rh-carreras',this,'rh-perfil')">Carreras SF según perfil</div>
+  </div>
+  <div id="rh-perfil">
+    <div class="card"><div style="position:relative;width:100%;max-width:320px;height:240px;margin:0 auto 10px"><canvas id="radarH"></canvas></div><div id="rh-scores"></div></div>
+    <div id="rh-perfiles"></div>
+  </div>
+  <div id="rh-carreras" style="display:none">
+    <div class="card"><h3>Carreras recomendadas según perfil profesional</h3><p style="font-size:11px;color:var(--gray3);margin:4px 0 10px">Basado en tu perfil de personalidad profesional</p><div id="rh-career-list"></div></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:1.2rem;flex-wrap:wrap">
+    <button class="btn-primary" onclick="goToKuder()">Continuar a Escala de Áreas de Interés</button>
+    <button class="btn-white btn-sm" onclick="exportPDFHolland()">Exportar PDF este test</button>
+  </div>
+</div>
+
+<div id="s-kuder" class="screen">
+  <p style="font-size:11px;color:var(--gr4);font-weight:600">Paso 3 de 5 · Escala de Áreas de Interés Profesional</p>
+  <div class="progress-bar-green"><div class="progress-fill-green" id="k-prog" style="width:50%"></div></div>
+  <h2 id="k-ttl" style="color:var(--gr5)">Serie A</h2>
+  <div class="serie-header">
+    <span class="serie-title" id="k-serie-lbl">Serie A de 5</span>
+    <span class="sel-count" id="k-sel-count">0 / 2 seleccionadas</span>
+  </div>
+  <div id="max-banner" class="max-banner"><span>&#10003;</span> 2 opciones seleccionadas — podés continuar o cambiar tu elección</div>
+  <div class="card-green">
+    <p style="font-size:12px;margin-bottom:10px;color:var(--gr4);font-weight:600">Elegí exactamente <strong>2 opciones</strong> de las 20 que más te interesen.</p>
+    <div id="warn-k" class="warn-box">Seleccioná exactamente 2 opciones antes de continuar.</div>
+    <div id="k-opts"></div>
+  </div>
+  <div class="nav-row">
+    <button class="btn" style="border-color:var(--gr3);color:var(--gr4)" onclick="kBack()">Atrás</button>
+    <button class="btn-green" onclick="kNext()">Continuar</button>
+  </div>
+</div>
+
+<div id="s-res-kuder" class="screen">
+  <p style="font-size:11px;color:var(--gr4);font-weight:600">Paso 4 de 5 · Resultados — Escala de Áreas de Interés Profesional</p>
+  <div class="progress-bar-green"><div class="progress-fill-green" style="width:80%"></div></div>
+  <h2 style="color:var(--gr5)">Áreas de interés destacadas</h2>
+  <div class="tab-green-bar">
+    <div class="tab-green on" onclick="switchTab2G('rk-areas',this,'rk-carreras')">Áreas de interés</div>
+    <div class="tab-green" onclick="switchTab2G('rk-carreras',this,'rk-areas')">Carreras SF según áreas</div>
+  </div>
+  <div id="rk-areas"><div class="card-green"><div id="rk-scores"></div></div><div id="rk-descs"></div></div>
+  <div id="rk-carreras" style="display:none">
+    <div class="card-green"><h3 style="color:var(--gr5)">Carreras recomendadas según áreas de interés</h3><p style="font-size:11px;color:var(--gr4);margin:4px 0 10px">Basado en tus áreas de interés profesional</p><div id="rk-career-list"></div></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:1.2rem;flex-wrap:wrap">
+    <button class="btn-green" onclick="goToCruzado()">Ver Ranking Cruzado Final</button>
+    <button class="btn-white btn-sm" onclick="exportPDFKuder()">Exportar PDF este test</button>
+  </div>
+</div>
+
+<div id="s-cruzado" class="screen">
+  <p style="font-size:11px;color:var(--sky4);font-weight:600">Paso 5 de 5 · Resultado integrado final</p>
+  <div class="progress-bar"><div class="progress-fill-blue" style="width:100%"></div></div>
+  <h2 id="cruz-name">Ranking cruzado final</h2>
+  <div class="highlight-card">
+    <div class="cruzado-pill">Análisis integrado · Perfiles + Áreas de Interés</div>
+    <p style="font-size:12px;margin-top:7px;color:var(--sky5)">Las carreras que aparecen primero coinciden con <strong>ambas evaluaciones</strong>.</p>
+    <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:10px" id="cruz-badges"></div>
+  </div>
+  <div class="card">
+    <h3>Carreras con mayor afinidad en Santa Fe</h3>
+    <p style="font-size:11px;color:var(--gray3);margin:3px 0 10px">Ranking cruzado — Test de Perfiles + Escala de Áreas de Interés</p>
+    <div id="cruz-careers"></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:1.2rem;flex-wrap:wrap">
+    <button class="btn-primary" onclick="exportPDFCompleto()">Exportar informe completo PDF</button>
+    <button class="btn-white" onclick="goHome()">Nuevo test</button>
+    <button class="btn btn-sm" onclick="switchHomeTab('pacientes',null);showScreen('s-home');loadPatients()">Ver pacientes</button>
+  </div>
+</div>
+
+<div id="s-detail" class="screen">
+  <button class="btn btn-sm" onclick="showScreen('s-home');loadPatients()" style="margin-bottom:12px">← Volver</button>
+  <h2 id="det-name">Paciente</h2>
+  <p id="det-fecha" style="font-size:11px;color:var(--gray3);margin-bottom:12px"></p>
+  <div class="tab-bar">
+    <div class="tab on" onclick="switchDetTab('dd-holland',this)">Perfiles</div>
+    <div class="tab" onclick="switchDetTab('dd-kuder',this)">Áreas de interés</div>
+    <div class="tab" onclick="switchDetTab('dd-cruzado',this)">Ranking cruzado</div>
+  </div>
+  <div id="dd-holland"><div id="det-h-content"></div></div>
+  <div id="dd-kuder" style="display:none"><div id="det-k-content"></div></div>
+  <div id="dd-cruzado" style="display:none"><div id="det-c-content"></div></div>
+  <div style="margin-top:1rem"><button class="btn-primary btn-sm" onclick="exportPDFFromDetail()">Exportar informe completo PDF</button></div>
+</div>
+
+</div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc, collection, query, where, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBqVcC8sC60FcKpQcMO9Rhx7adkb0sX1nU",
+    authDomain: "mf-apps-865e7.firebaseapp.com",
+    projectId: "mf-apps-865e7",
+    storageBucket: "mf-apps-865e7.firebasestorage.app",
+    messagingSenderId: "401158621173",
+    appId: "1:401158621173:web:e0e9e900050496726342bc"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // ─── STORE usando Firestore ───────────────────────────────────────────────
+  // Colección: mfvoc — todos los datos de esta app van acá
+  const COL = 'mfvoc';
+
+  window.store = {
+    async set(k, v) {
+      await setDoc(doc(db, COL, k), { value: v });
+    },
+    async get(k) {
+      const snap = await getDoc(doc(db, COL, k));
+      return snap.exists() ? { value: snap.data().value } : null;
+    },
+    async list(prefix) {
+      // Firestore no tiene LIKE, usamos rango de strings
+      const q = query(
+        collection(db, COL),
+        where('__name__', '>=', prefix),
+        where('__name__', '<', prefix + '')
+      );
+      const snap = await getDocs(q);
+      return { keys: snap.docs.map(d => d.id) };
+    },
+    async del(k) {
+      await deleteDoc(doc(db, COL, k));
+    }
+  };
+
+  console.log('%c MF VOCACIONAL v10 FIREBASE CARGADO ', 'background:#2196C9;color:#fff;font-size:14px;padding:4px 8px;border-radius:4px');
+
+  // Iniciar la app una vez que Firebase está listo
+  window._firebaseReady = true;
+  if (window._appInit) window._appInit();
+</script>
+<script>
+let ADMIN_PASS = null; // Se carga desde Firestore
+// ────────────────────────────────────────────────────────────────────────────
+
+// Esperar a que Firebase esté listo
+function _waitStore(fn) {
+  if (window.store) { fn(); }
+  else { window._appInit = fn; }
+}
+
+// ─── DATOS DEL TEST ──────────────────────────────────────────────────────────
+const ORACIONES=["Es importante para mí tener un cuerpo fuerte y ágil.","Necesito tener una comprensión completa de las cosas.","La música, el color, la belleza de cualquier clase pueden realmente afectar mi manera de ser.","La gente enriquece mi vida y le da sentido.","Tengo confianza en mí mismo/a como para poder hacer las cosas.","Me interesa tener claras las pautas para saber qué hacer.","Usualmente puedo construir o sostener cosas sólidas por mí mismo.","Puedo pasar absorto por horas en mis pensamientos.","Aprecio la belleza a mi alrededor, el color y el diseño significan mucho para mí.","Me gusta estar acompañado.","Me gusta la competencia.","Necesito tener mi entorno en orden antes de iniciar un proyecto.","Disfruto haciendo manualidades.","Es gratificante explorar nuevas ideas.","Siempre estoy buscando nuevas formas para expresar mi creatividad.","Valoro la capacidad de compartir cosas personales con los demás.","Me gusta ser una persona clave del grupo.","Me enorgullece ser cuidadoso en todos los detalles de mi trabajo.","No me molesta ensuciarme las manos.","Veo a la educación como un proceso que se da a lo largo de la vida, que desarrolla y marca mi mente.","Me encanta vestirme de manera informal, intentar nuevos colores y estilos.","Casi siempre me doy cuenta cuando alguien necesita hablar.","Me alegra encontrar gente organizada y en acción.","Una buena rutina ayuda a hacer el trabajo.","Me gusta comprar materiales para hacer las cosas por mí mismo.","A veces puedo estar sentado por largo tiempo armando rompecabezas o leyendo o sólo pensando.","Tengo una gran imaginación.","Me hace sentir bien cuidar a la gente.","Me gusta que me tengan confianza para hacer un trabajo.","Estoy satisfecho sabiendo que hice un trabajo cuidadoso y completamente.","Me gusta hacer cosas prácticas, manuales.","Me meto de lleno a leer sobre temas que despiertan mi curiosidad.","Me gusta aplicar creativamente nuevas ideas.","Si tengo un problema con alguien me gusta hablar y resolverlo.","Para tener éxito hay que apuntar alto.","Prefiero estar en una posición en la que no tenga responsabilidad en las decisiones.","No me gusta perder mucho tiempo en discusiones. Lo que es así es así.","Necesito analizar profundamente un problema antes de actuar.","Me gusta arreglar las cosas a mi alrededor para que parezcan únicas y diferentes.","Cuando me siento deprimido, busco un amigo para hablar.","Después de sugerir un plan, prefiero dejarle a otros la atención de los detalles.","En general, me siento cómodo en cualquier parte.","Es estimulante realizar actividades al aire libre.","Sigo preguntando, ¿Por qué?","Deseo que mi trabajo sea una expresión de mi manera de ser y mis sentimientos.","Me gustaría encontrar medios para hacer que la gente se interese más en el prójimo.","Es emocionante ser parte de decisiones importantes.","Me gusta que haya alguien más que se ocupe.","Me gusta que lo que me rodea sea comprensible y práctico.","Necesito meterme en el problema hasta encontrar una respuesta.","La belleza de la naturaleza toca algo muy profundo dentro de mí.","Las relaciones familiares son muy importantes para mí.","Ascender y progresar es importante para mí.","La eficiencia para mí significa armar a diario el conjunto de manera cuidadosa y equilibrada.","Un sistema de leyes fuertes y el orden son importantes para prevenir el caos.","Los libros que desafían la manera de pensar siempre amplían mi perspectiva.","Busco ir a espectáculos artísticos, musicales y ver buenas películas.","Cuando paso un tiempo sin ver a alguien, quisiera saber en qué está.","Influir en la gente es algo atractivo.","Cuando me comprometo a hacer algo tengo en cuenta cada detalle.","Y bien, el trabajo físico duro no le hace mal a nadie.","Me gustaría aprender todo sobre los temas que interesan.","No me gusta ser del montón, quiero hacer las cosas de manera diferente.","Dime cómo te puedo ayudar.","Estoy dispuesto a asumir riesgos para seguir adelante.","Quiero instrucciones precisas y reglas claras cuando comienzo algo.","Lo primero que busco en un auto es un motor bien construido.","Algunas personas son intelectualmente estimulantes.","Cuando estoy creando no presto atención a otras cosas.","Estoy convencido de que mucha gente en nuestra sociedad necesita ayuda.","Es divertido obtener ideas a través de la gente.","Odio que cambien los esquemas cuando ya los aprendí.","Usualmente sé cómo actuar en situaciones de emergencia.","Es atrapante leer sobre nuevos descubrimientos.","Me gusta crear situaciones fuera de lo común.","Con frecuencia dejo mis cosas para prestar atención a la gente que parece solitaria y sin amigos.","Me encanta el intercambio.","No me gusta hacer cosas de las que no estoy seguro de su consistencia.","Los deportes son importantes para alcanzar la fortaleza física.","Siempre he tenido curiosidad acerca de los trabajos al aire libre.","Es divertido tener condiciones para tratar o hacer algo inusual.","Creo que la gente es básicamente buena.","Si no puedo hacer algo en el primer intento, trato otra vez con entusiasmo y energía.","Aprecio saber exactamente qué es lo que la gente espera de mí.","Me gusta poner distancia en las cosas para ver si puedo asegurarlas.","No hay que apurarse, se puede pensar y planificar los movimientos lógicamente.","Sería duro imaginar la vida sin belleza alrededor.","A menudo la gente me confía sus problemas.","En general, me acerco a la gente que me pone en contacto con distintos recursos.","No necesito demasiado para ser feliz."];
+const OR_T=["R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C","R","I","A","S","E","C"];
+const FORT={R:["Persistencia","Ahorro","Franqueza","Concreción","Realismo","Practicidad","Dinamismo","Fortaleza","Tradicionalismo","Laboriosidad","Confiabilidad","Coordinación","Sentido Común"],I:["Curiosidad","Lógica","Precisión","Inventiva","Método","Previsión","Exploración","Reflexión","Divergencia","Originalidad","Crítica","Capacidad lectora"],A:["Imaginación","Espontaneidad","Informalidad","Expresión","Independencia","Progresismo","Originalidad","Creatividad","Adaptabilidad","Intuición","Sensibilidad"],S:["Paciencia","Persuasión","Idealismo","Responsabilidad","Empatía","Cooperación","Tolerancia","Solidaridad","Calidez","Autenticidad","Comprensión","Sociabilidad"],E:["Entusiasmo","Ambición","Optimismo","Decisión","Aventura","Dominio","Actividad","Popularidad","Seguridad","Tenacidad","Exigencia","Competitividad"],C:["Cuidado","Metodicidad","Eficiencia","Practicidad","Organización","Persistencia","Escrúpulos","Responsabilidad","Cautela","Detallismo","Discreción"]};
+const VALS={R:["Tiempo libre","Sentido común","Libertad con responsabilidad","Naturaleza"],I:["Independencia","Verdad","Curiosidad y sistematicidad","Vida intelectual"],A:["Belleza","Expresión personal","Creatividad","Originalidad"],S:["Igualdad de oportunidades","Solidaridad","Religión","Servicio y trabajo en equipo"],E:["Competencia y aventura","Desafío","Estatus","Liderazgo"],C:["Seguridad","Eficiencia","Precisión y validez","Trabajo firme"]};
+const APTS={R:["Espacial","Mecánica","Atlética","Manual","Kinésica"],I:["Analítica","Matemática","Científica","Lógica","Inquisitiva","Naturista"],A:["Expresiva","Visualizadora","Imaginativa","Musical","Plástica"],S:["Comprensión","Apoyo a otros","Comunicación","Apoyo","Enseñanza"],E:["Persuasión","Expresión oral","Administración","Dirección","Trabajo en equipo"],C:["Finanzas","Estadística","Administración","Contabilidad","Computación"]};
+const AMBS={R:["Ambientes al aire libre","Organizaciones con autoridad clara","Con productos tangibles","Orientadas a la acción"],I:["Organizaciones con libertad académica","Instituciones orientadas a desafíos","Lugares que priorizan alternativas"],A:["Organizaciones flexibles con expresión libre","Instituciones de habilidades artísticas","Ambiente sin estructura rígida"],S:["Organizaciones sociales o voluntarias","Grupos de trabajo colaborativo","Lugares al servicio comunitario"],E:["Ambientes donde se toman decisiones","Organizaciones de negocios y ventas","Organizaciones de servicios"],C:["Ambientes con instrucciones claras","Estructuras con cadenas de comando","Calidad de inspección y control"]};
+const PERFILES={R:{nombre:"Realista",desc:"Personas prácticas que prefieren actividades físicas, manuales y al aire libre. Son concretos, seguros y disfrutan trabajar con objetos, máquinas o animales. Les gusta construir, moldear y resolver problemas concretos.",ambientes:"Talleres, fábricas, construcción, laboratorios, ambientes al aire libre.",aptitudes:"Habilidad manual, coordinación, fuerza física, resistencia, destreza técnica."},I:{nombre:"Investigador",desc:"Curiosos, analíticos y reflexivos. Les gusta conocer el porqué de las cosas, resolver problemas e investigar, trabajar con teorías o datos. Prefieren el pensamiento abstracto y el análisis.",ambientes:"Laboratorios, universidades, oficinas de investigación, entornos científicos.",aptitudes:"Pensamiento crítico, análisis, razonamiento lógico, observación, investigación."},A:{nombre:"Artístico",desc:"Creativos, imaginativos y expresivos. Les atraen las actividades artísticas, la música, la escritura y otras formas de expresión. Prefieren ambientes flexibles y sin mucha estructura.",ambientes:"Estudios de arte, escenarios, talleres creativos, editoriales, medios.",aptitudes:"Creatividad, sensibilidad artística, expresión oral y escrita, innovación."},S:{nombre:"Social",desc:"Disfrutan ayudar, enseñar y cuidar a otros. Son empáticos, comunicativos y colaboradores. Reflejan habilidades de inteligencia emocional y prefieren ambientes donde interactúan con personas.",ambientes:"Escuelas, hospitales, organizaciones sociales, centros comunitarios.",aptitudes:"Comunicación, empatía, paciencia, habilidades interpersonales, enseñanza."},E:{nombre:"Emprendedor",desc:"Seguros de sí mismos, extrovertidos y optimistas. Líderes naturales, persuasivos, ambiciosos y orientados al negocio. Les gusta influir en otros y tomar decisiones.",ambientes:"Empresas, oficinas, entornos de ventas, política, organizaciones.",aptitudes:"Liderazgo, persuasión, toma de decisiones, negociación, energía."},C:{nombre:"Convencional",desc:"Organizados, detallistas y responsables. Prefieren tareas estructuradas, sistemáticas y rutinarias. Son buenos con números y manejo de datos.",ambientes:"Oficinas, bancos, áreas administrativas, contabilidad, logística.",aptitudes:"Organización, precisión, manejo de datos, responsabilidad, concentración."}};
+const RC={R:"#2196C9",I:"#0C5E8A",A:"#6B3FA0",S:"#0a7c5c",E:"#C75B00",C:"#5A7A8E"};
+const RN={R:"Realista",I:"Investigador",A:"Artístico",S:"Social",E:"Emprendedor",C:"Convencional"};
+const KA=["Actividades Deportivas","Científico-Naturales y Agropecuarias","Literarias","Industriales","Teóricas","Mecánicas","Estéticas","Económicas","Directivas","Arquitectónicas y Decorativas","Científico-Médicas","Educativas","Técnicas","De Investigación","Sociales","Humanistas","Manuales","Científico-Exactas","Comerciales","Políticas"];
+const KD=["Práctica, enseñanza o gestión de actividades físicas y deportivas. Requieren habilidades motrices, resistencia y trabajo en equipo.","Estudio de la naturaleza, ecosistemas, producción agropecuaria y uso sostenible de recursos.","Interés por lectura, escritura, análisis de textos y comunicación escrita. Creatividad verbal y sensibilidad por el lenguaje.","Producción a gran escala, procesos industriales y optimización de recursos. Control de calidad y diseño de procesos.","Reflexión, análisis conceptual y creación de teorías. Filosofía, ciencias puras y abstracción.","Funcionamiento, reparación y diseño de máquinas y dispositivos. Solución práctica de problemas técnicos.","Apreciación y creación artística. Sensibilidad estética y creatividad visual o auditiva.","Análisis financiero, mercados y gestión de capital. Visión estratégica y matemática aplicada.","Liderazgo, toma de decisiones y coordinación de equipos o proyectos.","Diseño de espacios y objetos funcionales y atractivos. Combina creatividad con conocimientos técnicos.","Prevención, diagnóstico y tratamiento de enfermedades. Investigación biomédica y vocación de servicio.","Enseñanza, formación y acompañamiento en el aprendizaje. Paciencia, empatía y comunicación efectiva.","Aplicación práctica de conocimientos tecnológicos para resolver problemas.","Descubrimiento, análisis y producción de nuevo conocimiento en laboratorio, archivo o campo.","Interacción social, trabajo comunitario y bienestar colectivo. Aconsejar, acompañar, defender derechos.","Estudio de la cultura, pensamiento, historia y expresiones humanas. Análisis crítico y comprensión social.","Actividades que requieren destreza física y coordinación fina, vinculadas a construcción o producción artesanal.","Estudio y aplicación de matemáticas, física, química y ciencias exactas. Razonamiento lógico y abstracción.","Ventas, negociación, gestión de clientes y comercio.","Asuntos públicos, gestión gubernamental y liderazgo social."];
+const KS=[["Participar en encuentros deportivos.","Dedicarse al mejoramiento de las actividades agropecuarias.","Publicar una obra literaria.","Instalar una gran industria.","Profundizar sobre temas religiosos y metafísicos.","Hacer instalaciones eléctricas.","Dedicarse a las artes plásticas.","Llevar la contabilidad de una empresa.","Ser presidente de una institución cultural.","Planear canteros y fuentes para decoración de parques y jardines.","Estudiar la influencia de la alimentación en la salud de la población.","Ser maestro en una escuela modelo.","Efectuar importantes obras de ingeniería.","Dedicarse a la investigación sobre causas de enfermedades.","Cambiar ideas con distintos tipos de gente sobre formas de vida.","Ser abogado criminalista.","Dedicarse a trabajos finos de ebanistería, tallado o repujado.","Realizar tareas en un laboratorio de productos químicos.","Dedicarse a la promoción y venta de un importante producto.","Dedicarse a la política."],["Hacer vida al aire libre practicando juegos de competencia.","Coleccionar una variedad de animales.","Hacer crítica literaria.","Dedicarse a la industria química.","Buscar la raíz filosófica de diversas actitudes humanas.","Aceitar y ajustar maquinarias para mantenerlas en funcionamiento.","Ejecutar un instrumento musical y componer música.","Dedicarse a la economía política.","Ser gerente general de una importante empresa.","Diseñar y construir una villa con criterios arquitectónicos modernos.","Practicar primeros auxilios y traslado de personas heridas.","Investigar sobre nuevas técnicas pedagógicas.","Inventar un equipo electrónico de alto rendimiento.","Investigar en el campo de los viajes interespaciales.","Recibir viajeros y actuar como guía de turismo.","Visitar hogares indigentes y ayudar a obtener recursos legales o médicos.","Dedicarse a la impresión prolija de letras y carteles.","Trabajar en la obtención de productos derivados del petróleo.","Llevar adelante exitosamente una empresa comercial.","Dar conferencias sobre temas interesantes a numeroso público."],["Dedicarse a la aventura física (alpinismo, exploraciones).","Confeccionar un herbario con las especies más raras.","Escribir los editoriales de un diario importante.","Fabricar un artículo interesante para el consumo diario.","Resolver problemas matemáticos de alto nivel.","Hacer aeromodelos, botes, radios, muebles, etc.","Hacer crítica de arte.","Mantener objetos y cuentas en orden dentro de archivos.","Asumir la conducción de un grupo de jóvenes.","Crear diseños para urbanización.","Dedicarse a la curación de enfermedades endémicas.","Dedicarse a la enseñanza de niños con necesidades especiales.","Ser técnico en telecomunicaciones.","Dedicarse a la investigación de nuevos métodos estadísticos.","Organizar un club social.","Dedicarse a la atención de enfermos mentales y personas lisiadas.","Colocar pequeñas piezas con instrumentos minúsculos en relojes, radios.","Llevar registro de datos como peso, temperatura, movimiento de cuerpos.","Ser dirigente de la cámara de comercio.","Dirigir debates."],["Practicar deportes solitarios (pesca, navegación).","Dedicarse a la observación y estudio de la naturaleza.","Escribir poemas u obras de teatro.","Instalar una importante planta para perforación de petróleo.","Profundizar en el campo de la lógica y la teoría del conocimiento.","Hacer mediciones con aparatos especiales (micrómetros, compases).","Dedicarse al arte fotográfico.","Manejar máquinas calculadoras.","Tener un alto cargo en la política.","Dibujar planos de casas o edificios públicos funcionales.","Ser médico psicoanalista.","Crear un jardín de infantes modelo.","Diseñar un sistema automático de señales para ferrocarriles.","Elaborar estadísticas sobre las variaciones climáticas de una región.","Trabajar en la gestión de una mutual o cooperativa.","Preparar material didáctico para el aprendizaje de los sordos.","Dedicarse a la fabricación de muebles de estilo.","Observar y anotar sistemáticamente los fenómenos de la naturaleza.","Responsabilizarse de los cobros y pagos de una empresa.","Escribir artículos sobre temas de actualidad política."],["Practicar natación, atletismo u otros deportes individuales.","Realizar investigaciones sobre plantas y su aplicación industrial.","Crear cuentos y novelas.","Desarrollar nuevos métodos de producción industrial.","Realizar estudios abstractos de geometría y álgebra.","Construir o reparar máquinas y motores.","Interpretar y crear obras musicales.","Manejar los asuntos financieros de una empresa.","Encabezar un equipo de trabajo para lograr objetivos concretos.","Diseñar el interior de grandes edificios públicos.","Investigar la acción de los medicamentos en el organismo.","Dedicarse a la orientación de jóvenes con problemas.","Instalar y mantener sistemas de comunicaciones telefónicas.","Realizar investigaciones sobre los efectos de las radiaciones.","Organizar actividades de recreación en una comunidad.","Trabajar con personas que tienen problemas de adaptación social.","Preparar artesanías o tejidos para su comercialización.","Realizar cálculos de estructuras para obras de ingeniería.","Ocuparse de la organización y distribución de un negocio.","Participar en congresos internacionales de política exterior."]];
+const CARRERAS=[{n:"Lic. en Educación Física",i:"UNL/UGR",h:["R","S"],k:[0,1]},{n:"Lic. en Kinesiología y Fisiatría",i:"UNL/UCSF/UGR",h:["R","S"],k:[0,10]},{n:"Tecnic. Preparación Física y Entrenamiento",i:"UNL",h:["R","S"],k:[0]},{n:"Tecnic. Gestión Deportiva",i:"UNL",h:["R","E"],k:[0,8]},{n:"Yoga y Salud Integral",i:"UGR SF",h:["R","S"],k:[0,10]},{n:"Ingeniería Agronómica",i:"UNL",h:["R","I"],k:[1,3]},{n:"Medicina Veterinaria",i:"UNL",h:["R","I","S"],k:[1,10]},{n:"Tecnic. Tecnología de Carnes",i:"UNL",h:["R","I"],k:[1,3]},{n:"Tecnic. Poscosecha de Granos",i:"UNL",h:["R","I"],k:[1,3]},{n:"Ingeniería Ambiental",i:"UNL",h:["R","I"],k:[1,13]},{n:"Lic. en Biodiversidad",i:"UNL",h:["I","R"],k:[1,13]},{n:"Lic. en Saneamiento Ambiental",i:"UNL",h:["R","I","C"],k:[1,13]},{n:"Tecnicatura en Bibliotecología",i:"UNL",h:["C","I"],k:[2,13]},{n:"Archivística",i:"Instituto 12",h:["C"],k:[2,13]},{n:"Licenciatura en Letras",i:"UNL",h:["A","I"],k:[2,15]},{n:"Lic. en Enseñanza de Lengua y Literatura",i:"UNL",h:["A","S"],k:[2,11]},{n:"Lic. en Periodismo y Comunicación",i:"UNL",h:["A","S","E"],k:[2,15]},{n:"Comunicación Social",i:"Instituto 12",h:["A","S"],k:[2,14]},{n:"Locución",i:"Instituto 12",h:["A","E"],k:[2,15]},{n:"Tecn. Superior en Periodismo",i:"IESERH/IES",h:["A","S"],k:[2,15]},{n:"Lic. en Inglés",i:"UNL",h:["A","S"],k:[2,15]},{n:"Ingeniería Industrial",i:"UNL/UTN",h:["R","I","C"],k:[3,5]},{n:"Ingeniería en Alimentos",i:"UNL",h:["R","I"],k:[3,10]},{n:"Lic. en Ciencia y Tecnología de los Alimentos",i:"UNL",h:["I","R"],k:[3,10]},{n:"Ingeniería Química",i:"UNL",h:["R","I"],k:[3,17]},{n:"Tecnic. Químico Analista",i:"UNL",h:["I","R"],k:[3,17]},{n:"Tecnic. Logística",i:"ADE",h:["R","C","E"],k:[3,8]},{n:"Licenciatura en Filosofía",i:"UNL/UCSF",h:["I","A"],k:[4,15]},{n:"Lic. en Matemática Aplicada",i:"UNL",h:["I","C"],k:[4,17]},{n:"Licenciatura en Física",i:"UNL",h:["I","R"],k:[4,17]},{n:"Licenciatura en Sociología",i:"UNL",h:["I","S"],k:[4,14]},{n:"Licenciatura en Historia",i:"UNL",h:["I","A"],k:[4,15]},{n:"Lic. en Ciencia Política",i:"UNL",h:["E","I","S"],k:[19,14]},{n:"Ingeniería Mecánica",i:"UTN",h:["R","I"],k:[5,3]},{n:"Tecnic. Mecatrónica",i:"UTN",h:["R","I"],k:[5,12]},{n:"Tecnic. Automatización y Robótica",i:"UNL",h:["R","I"],k:[5,12]},{n:"Lic. en Diseño Industrial",i:"UCSF",h:["A","R"],k:[5,9]},{n:"Tecnic. Diseño y Programación de Videojuegos",i:"UNL",h:["A","I","R"],k:[5,12]},{n:"Lic. en Música (múltiples orientaciones)",i:"UNL",h:["A"],k:[6]},{n:"Tecnic. Arreglos Musicales",i:"UNL",h:["A"],k:[6]},{n:"Tecnic. Diseño Gráfico y Comunicación Visual",i:"IES",h:["A","E"],k:[6,9]},{n:"Tecnic. Diseño Digital",i:"IES",h:["A","I"],k:[6,12]},{n:"Tecnic. Diseño y Producción de Indumentaria",i:"IES/IESERH",h:["A","R"],k:[6,16]},{n:"Decoración de Interiores",i:"Instituto 12",h:["A","R"],k:[6,9]},{n:"Museología",i:"Instituto 12",h:["A","I","S"],k:[6,15]},{n:"Gastronomía",i:"Instituto Sol",h:["R","A","E"],k:[6,16]},{n:"Contador Público",i:"UNL/UCSF",h:["C","E","I"],k:[7,8]},{n:"Licenciatura en Economía",i:"UNL",h:["I","E","C"],k:[7,8]},{n:"Licenciatura en Administración",i:"UNL/UCSF",h:["E","C"],k:[7,8]},{n:"Lic. en Ciencia de Datos",i:"UNL",h:["I","C"],k:[7,17]},{n:"Dirección de Negocios",i:"UCES",h:["E","C"],k:[8,7]},{n:"Lic. en Tecnologías para Gestión de Organizaciones",i:"UNL",h:["E","C","I"],k:[8,12]},{n:"Comercio Exterior",i:"UCES",h:["E","C","I"],k:[8,18]},{n:"Arquitectura",i:"UNL/UCSF",h:["A","R","I"],k:[9,5]},{n:"Bioquímica",i:"UNL",h:["I","R"],k:[10,17]},{n:"Medicina",i:"UNL",h:["I","S","R"],k:[10,13]},{n:"Lic. en Nutrición",i:"UNL/UCSF",h:["S","I"],k:[10,1]},{n:"Farmacia",i:"UCSF",h:["I","R","C"],k:[10,17]},{n:"Lic. en Obstetricia",i:"UNL/UCSF",h:["S","R"],k:[10]},{n:"Lic. en Terapia Ocupacional",i:"UNL/UCSF/UGR",h:["S","R"],k:[10,11]},{n:"Lic. en Fonoaudiología",i:"UCSF",h:["S","I"],k:[10,11]},{n:"Lic. en Podología",i:"UNL/UGR",h:["R","S"],k:[10]},{n:"Lic. en Ortesis y Prótesis",i:"UGR",h:["R","S"],k:[10,6]},{n:"Lic. en Psicopedagogía",i:"UGR/UCSF",h:["S","I"],k:[11,4]},{n:"Acompañamiento Terapéutico",i:"UGR SF",h:["S","I"],k:[11,14]},{n:"Psicología",i:"UCES/UCSF",h:["S","I"],k:[11,13]},{n:"Lic. en Administración de Salud",i:"UNL",h:["C","S","E"],k:[11,8]},{n:"Lic. en Educación Especial",i:"UNL",h:["S","A"],k:[11,14]},{n:"Educación Inicial y Primaria",i:"Almirante Brown/Normal",h:["S","A"],k:[11,15]},{n:"Lic. en Educación en Primeras Infancias",i:"UNL",h:["S","A"],k:[11,15]},{n:"Lic. en Gestión Educativa",i:"UNL",h:["S","E","C"],k:[11,8]},{n:"Ingeniería Informática",i:"UNL",h:["I","R","C"],k:[12,17]},{n:"Ingeniería en Sistemas de Información",i:"UTN",h:["I","C","R"],k:[12,17]},{n:"Tecnic. Desarrollo de Software",i:"IES",h:["I","C"],k:[12,17]},{n:"Ingeniería en Inteligencia Artificial",i:"UNL",h:["I","R","C"],k:[12,17]},{n:"Ciberseguridad",i:"UGR SF",h:["I","C"],k:[12,17]},{n:"Ingeniería Eléctrica",i:"UTN",h:["R","I"],k:[12,5]},{n:"Ingeniería en Recursos Hídricos",i:"UNL",h:["R","I"],k:[12,1]},{n:"Licenciatura en Química",i:"UNL",h:["I","R"],k:[13,17]},{n:"Abogacía",i:"UNL/UCSF",h:["E","I","S"],k:[14,19]},{n:"Notariado",i:"UCSF",h:["C","E","I"],k:[14,8]},{n:"Lic. en Criminología y Seguridad Ciudadana",i:"UNL",h:["I","S","E"],k:[14,19]},{n:"Lic. en Relaciones Internacionales",i:"UCSF",h:["E","S","I"],k:[14,19]},{n:"Licenciatura en Trabajo Social",i:"UNL",h:["S","E"],k:[14,15]},{n:"Turismo",i:"Instituto Sol",h:["S","E"],k:[14,15]},{n:"Hotelería",i:"Instituto Sol",h:["S","E","C"],k:[14,8]},{n:"Organización de Eventos",i:"Instituto Sol",h:["E","S","A"],k:[8,14]},{n:"Lic. en Ciencias de la Comunicación",i:"UCSF",h:["A","S"],k:[15,2]},{n:"Relaciones Públicas e Institucionales",i:"UCES",h:["E","S","A"],k:[15,8]},{n:"Recursos Humanos",i:"UCES",h:["S","E"],k:[15,8]},{n:"Marketing",i:"UCES",h:["E","A"],k:[18,6]},{n:"Martillero Público y Corredor Inmobiliario",i:"UNL/UCSF",h:["E","C"],k:[18,8]},{n:"Lic. en Administración de Empresas Digitales",i:"UCSF",h:["E","C","I"],k:[8,12]},{n:"Tecnic. Control y Auditoría Gubernamental",i:"UNL",h:["C","E","I"],k:[7,19]},{n:"Tecnic. Higiene y Seguridad en el Trabajo",i:"UNL",h:["R","C"],k:[11,12]},{n:"Tecnic. Higiene y Seguridad Alimentaria",i:"UNL",h:["R","C","I"],k:[3,10]}];
+
+// ─── ESTADO ──────────────────────────────────────────────────────────────────
+let st = {nombre:'',p1sel:new Set(),p1pg:0,p2sel:{F:{},V:{},Ap:{},Am:{}},p2sec:0,
+          kSel:[[],[],[],[],[]],kPg:0,hSc:{R:0,I:0,A:0,S:0,E:0,C:0},
+          kSc:new Array(20).fill(0),radarH:null,currentPat:null};
+
+// ─── ADMIN ───────────────────────────────────────────────────────────────────
+function showAdminLogin() {
+  showModal(`
+    <h3 style="color:var(--sky5);margin-bottom:8px">Acceso administrador</h3>
+    <p style="font-size:13px;color:var(--gray4);margin-bottom:12px">Ingresá tu contraseña.</p>
+    <input type="password" id="admin-pass-input" placeholder="Contraseña" style="margin-bottom:8px"/>
+    <div id="admin-err" style="color:#e57373;font-size:12px;margin-bottom:8px;display:none">Contraseña incorrecta.</div>
+    <div style="display:flex;gap:8px">
+      <button class="btn-primary" onclick="checkAdminPass()">Entrar</button>
+      <button class="btn" onclick="closeModal()">Cancelar</button>
+    </div>`,
+    () => setTimeout(() => { const el = document.getElementById('admin-pass-input'); if(el){el.focus(); el.onkeydown = e => { if(e.key==='Enter') checkAdminPass(); };} }, 50)
+  );
+}
+
+async function checkAdminPass() {
+  const val = document.getElementById('admin-pass-input').value;
+  if (!val) return;
+  // Cargar contraseña desde Firestore si no está cargada
+  if (!ADMIN_PASS) {
+    try {
+      const r = await store.get('config');
+      if (r) {
+        const cfg = JSON.parse(r.value);
+        ADMIN_PASS = cfg.adminPass;
+      }
+    } catch(e) {
+      // Si falla la carga, bloquear
+      document.getElementById('admin-err').style.display = 'block';
+      document.getElementById('admin-err').textContent = 'Error de conexión. Intentá de nuevo.';
+      return;
+    }
+  }
+  if (val === ADMIN_PASS) {
+    closeModal();
+    loadPatients();
+    showScreen('s-admin');
+  } else {
+    document.getElementById('admin-err').style.display = 'block';
+    document.getElementById('admin-err').textContent = 'Contraseña incorrecta.';
+    document.getElementById('admin-pass-input').value = '';
+    document.getElementById('admin-pass-input').focus();
+  }
+}
+
+function cerrarAdmin() { showScreen('s-home'); }
+
+function showAddPatient() {
+  showModal(`
+    <h3 style="color:var(--sky5);margin-bottom:8px">Agregar paciente</h3>
+    <p style="font-size:13px;color:var(--gray4);margin-bottom:12px">Ingresá el nombre tal como lo escribirá el paciente al ingresar.</p>
+    <input type="text" id="new-pat-name" placeholder="Nombre y apellido" style="margin-bottom:8px" autocomplete="off"/>
+    <div id="add-err" style="color:#e57373;font-size:12px;margin-bottom:8px;display:none">Ingresá un nombre.</div>
+    <div style="display:flex;gap:8px">
+      <button class="btn-primary" onclick="addPatient()">Agregar y habilitar</button>
+      <button class="btn" onclick="closeModal()">Cancelar</button>
+    </div>`,
+    () => setTimeout(() => { const el = document.getElementById('new-pat-name'); if(el){el.focus(); el.onkeydown = e => { if(e.key==='Enter') addPatient(); };} }, 50)
+  );
+}
+
+async function addPatient() {
+  const nombre = document.getElementById('new-pat-name').value.trim();
+  if (!nombre) { document.getElementById('add-err').style.display='block'; return; }
+  const id = toId(nombre);
+  try {
+    const existing = await store.get('pac:' + id);
+    if (existing) { closeModal(); alert(nombre + ' ya existe. Podés habilitarlo desde el panel.'); return; }
+    await store.set('pac:' + id, JSON.stringify({
+      id, nombre, fecha: today(), habilitado: true, sinCompletar: true,
+      hSc:{R:0,I:0,A:0,S:0,E:0,C:0}, kSc: new Array(20).fill(0), top3:[]
+    }));
+    closeModal();
+    loadPatients();
+  } catch(e) { alert('Error al guardar. Revisá la conexión.'); }
+}
+
+async function toggleHabilitar(id) {
+  try {
+    const r = await store.get('pac:' + id);
+    if (!r) return;
+    const p = JSON.parse(r.value);
+    p.habilitado = !p.habilitado;
+    await store.set('pac:' + id, JSON.stringify(p));
+    loadPatients();
+  } catch(e) { alert('Error al cambiar estado.'); }
+}
+
+async function deletePatient(id) {
+  if (!confirm('¿Borrar este paciente? No se puede deshacer.')) return;
+  try {
+    await store.del('pac:' + id);
+    await store.del('session:' + id);
+    loadPatients();
+  } catch(e) { alert('Error al borrar.'); }
+}
+
+async function loadPatients() {
+  const el = document.getElementById('pat-list');
+  el.innerHTML = '<div class="empty">Cargando...</div>';
+  try {
+    const list = await store.list('pac:');
+    if (!list.keys.length) {
+      el.innerHTML = '<div class="empty">No hay pacientes aún.<br>Usá <strong>+ Agregar paciente</strong> para comenzar.</div>';
+      return;
+    }
+    const pats = [];
+    for (const k of list.keys) {
+      try { const r = await store.get(k); if(r) pats.push(JSON.parse(r.value)); } catch(e){}
+    }
+    pats.sort((a,b) => a.nombre.localeCompare(b.nombre));
+    el.innerHTML = '';
+    pats.forEach(p => {
+      const row = document.createElement('div');
+      row.className = 'pat-row';
+      const hab = p.habilitado !== false;
+      const sinC = p.sinCompletar === true;
+      const hasK = p.kSc && p.kSc.some(x=>x>0);
+      const badges = sinC
+        ? '<span style="font-size:11px;color:var(--gray3);font-style:italic">Sin completar</span>'
+        : (p.top3||[]).map(t=>'<span class="badge" style="font-size:10px;padding:2px 8px">'+RN[t]+'</span>').join('');
+      const estado = sinC
+        ? (hab ? '<span class="status-active">✓ Habilitado</span>' : '<span class="status-blocked">✗ Bloqueado</span>')
+        : (hab ? '<span class="status-active">✓ Activo</span>' : '<span class="status-blocked">✗ Bloqueado</span>');
+      const verBtn = sinC ? '' : '<button class="btn-primary btn-sm" onclick="viewPatient(\'' + p.id + '\')">Ver resultados</button>';
+      const pid = p.id;
+      row.innerHTML =
+        '<div style="flex:1;min-width:140px">' +
+          '<p style="font-size:13px;font-weight:700;color:var(--sky5)">' + p.nombre + '</p>' +
+          '<p style="font-size:11px;color:var(--gray3);margin-top:2px">' + p.fecha +
+            (sinC ? ' · Esperando inicio' : ' · ' + (hasK?'Completo':'Solo perfiles')) +
+          '</p>' +
+          '<div style="margin-top:4px">' + badges + '</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">' +
+          '<div>' + estado + '</div>' +
+          '<div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end">' +
+            verBtn;
+      row.innerHTML += (hab
+        ? '<button class="btn-active" onclick="toggleHabilitar(\''+pid+'\')" >🔓 Deshabilitar</button>'
+        : '<button class="btn-blocked" onclick="toggleHabilitar(\''+pid+'\')" >🔒 Habilitar</button>') +
+        '<button class="btn-danger" onclick="deletePatient(\''+pid+'\')" >✕ Borrar</button>' +
+        '</div></div>';
+      el.appendChild(row);
+    });
+  } catch(e) { el.innerHTML = '<div class="empty">Error al cargar pacientes.</div>'; }
+}
+
+async function viewPatient(id) {
+  try {
+    const r = await store.get('pac:' + id); if (!r) return;
+    const p = JSON.parse(r.value); st.currentPat = p;
+    document.getElementById('det-name').textContent = p.nombre;
+    document.getElementById('det-fecha').textContent = p.fecha;
+    const hs = p.hSc, ks = p.kSc || new Array(20).fill(0);
+    const sorted = Object.entries(hs).sort((a,b)=>b[1]-a[1]);
+    const top3 = sorted.slice(0,3).map(x=>x[0]);
+    const maxH = Math.max(...Object.values(hs),1);
+    document.getElementById('det-h-content').innerHTML =
+      '<div class="card"><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">' +
+      top3.map((t,i)=>'<span class="badge'+(i===0?' badge-top':'')+'">'+( i+1)+'° '+RN[t]+' ('+hs[t]+')</span>').join('') + '</div>' +
+      sorted.map(([t,v])=>'<div class="sbar"><div class="sbar-row"><span>'+RN[t]+'</span><span>'+v+'</span></div><div class="sbar-bg"><div class="sbar-fill" style="width:'+Math.round(v/maxH*100)+'%;background:'+RC[t]+'"></div></div></div>').join('') +
+      '</div>' + top3.map(t=>'<div class="card"><span class="badge badge-top" style="margin-bottom:6px">'+RN[t]+'</span><p class="pdesc">'+PERFILES[t].desc+'</p></div>').join('');
+    const kTop = ks.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0).slice(0,5);
+    const maxK = Math.max(...ks,1);
+    document.getElementById('det-k-content').innerHTML = kTop.length
+      ? '<div class="card-green">'+kTop.map(x=>'<div class="sbar"><div class="sbar-row"><span style="color:var(--gr5)">'+KA[x.i]+'</span><span style="color:var(--gr4);font-weight:700">'+x.v+'/5</span></div><div class="sbar-bg-green"><div class="sbar-fill" style="width:'+Math.round(x.v/maxK*100)+'%;background:var(--gr4)"></div></div></div>').join('')+'</div>' +
+        kTop.slice(0,3).map(x=>'<div class="card-green"><h3 style="color:var(--gr5)">'+KA[x.i]+'</h3><p class="pdesc">'+KD[x.i]+'</p></div>').join('')
+      : '<div class="empty">Sin datos de Áreas de Interés.</div>';
+    const ranked = rankC(hs,ks).slice(0,20); const maxC = Math.max(...ranked.map(c=>c.sc),1);
+    document.getElementById('det-c-content').innerHTML =
+      '<div class="card"><h3>Ranking cruzado · Perfiles + Áreas de Interés</h3>' +
+      '<p style="font-size:11px;color:var(--gray3);margin:4px 0 10px">Carreras disponibles en Santa Fe</p>' +
+      ranked.map((c,i)=>'<div class="career-item"><span class="c-rank">'+(i+1)+'</span><div style="flex:1"><div class="c-name">'+c.n+'</div><div class="c-inst">'+c.i+'</div></div><div class="c-bar" style="width:'+Math.max(Math.round(c.sc/maxC*80),4)+'px"></div><span class="c-pct">'+Math.round(c.sc/maxC*100)+'%</span></div>').join('') +
+      '</div>';
+    showScreen('s-detail');
+  } catch(e) { alert('Error al cargar el paciente.'); }
+}
+
+// ─── INICIO DE TEST (con verificación de habilitación) ───────────────────────
+async function startTest() {
+  const n = document.getElementById('nombre-input').value.trim();
+  if (!n) { document.getElementById('nombre-input').style.borderColor='#e57373'; return; }
+  document.getElementById('nombre-input').style.borderColor='';
+  const btn = document.querySelector('#s-home .btn-primary');
+  btn.textContent = 'Verificando...'; btn.disabled = true;
+  try {
+    const id = toId(n);
+    const r = await store.get('pac:' + id);
+    btn.textContent = 'Comenzar'; btn.disabled = false;
+    if (!r) { showBlockedModal(); return; }
+    const pac = JSON.parse(r.value);
+    if (pac.habilitado === false) { showBlockedModal(); return; }
+    // Habilitado — buscar sesión en curso
+    const sess_r = await store.get('session:' + id);
+    if (sess_r) {
+      const sess = JSON.parse(sess_r.value);
+      if (sess && sess.screen && sess.screen !== 's-cruzado') {
+        showResumeModal(n, sess); return;
+      }
+    }
+    initFreshTest(n);
+  } catch(e) {
+    btn.textContent = 'Comenzar'; btn.disabled = false;
+    alert('Error de conexión. Revisá tu internet e intentá de nuevo.');
+  }
+}
+
+function showBlockedModal() {
+  showModal(`
+    <div style="text-align:center">
+      <div style="font-size:36px;margin-bottom:12px">🔒</div>
+      <h3 style="color:var(--sky5);margin-bottom:8px">Sesión no habilitada</h3>
+      <p style="font-size:13px;color:var(--gray4);margin-bottom:16px">Tu sesión no está habilitada aún.<br>Consultá con tu orientador para continuar.</p>
+      <button class="btn-primary" onclick="closeModal()">Entendido</button>
+    </div>`
+  );
+}
+
+function showResumeModal(nombre, sess) {
+  const labels = {'s-p1':'Test de Perfiles (Parte 1)','s-p2':'Test de Perfiles (Parte 2)',
+    's-res-holland':'Resultados Perfiles','s-kuder':'Escala de Áreas de Interés','s-res-kuder':'Resultados Áreas de Interés'};
+  const donde = labels[sess.screen] || 'en progreso';
+  showModal(`
+    <h3 style="color:var(--sky5);margin-bottom:8px">Sesión encontrada</h3>
+    <p style="font-size:13px;color:var(--gray4);margin-bottom:16px">
+      <strong>${nombre}</strong> tiene un test guardado en: <strong>${donde}</strong>.<br><br>
+      ¿Querés retomar o empezar de nuevo?
+    </p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn-primary" onclick="closeModal();resumeSession('${nombre.replace(/'/g,"\'")}')">Retomar</button>
+      <button class="btn" onclick="closeModal();initFreshTest('${nombre.replace(/'/g,"\'")}')">Empezar de nuevo</button>
+    </div>`
+  );
+}
+
+function initFreshTest(n) {
+  st.nombre=n; st.p1sel=new Set(); st.p1pg=0; st.p2sel={F:{},V:{},Ap:{},Am:{}}; st.p2sec=0;
+  st.kSel=[[],[],[],[],[]]; st.kPg=0; st.hSc={R:0,I:0,A:0,S:0,E:0,C:0}; st.kSc=new Array(20).fill(0);
+  renderP1(); showScreen('s-p1');
+}
+
+async function resumeSession(nombre) {
+  try {
+    const r = await store.get('session:' + toId(nombre));
+    if (!r) { initFreshTest(nombre); return; }
+    const sess = JSON.parse(r.value);
+    st.nombre = nombre;
+    st.p1sel = new Set(sess.p1sel||[]);
+    st.p1pg = sess.p1pg||0;
+    st.p2sel = sess.p2sel||{F:{},V:{},Ap:{},Am:{}};
+    st.p2sec = sess.p2sec||0;
+    st.kSel = sess.kSel||[[],[],[],[],[]];
+    st.kPg = sess.kPg||0;
+    st.hSc = sess.hSc||{R:0,I:0,A:0,S:0,E:0,C:0};
+    st.kSc = sess.kSc||new Array(20).fill(0);
+    const scr = sess.screen||'s-p1';
+    if(scr==='s-p1'){renderP1();showScreen('s-p1');}
+    else if(scr==='s-p2'){renderP2();showScreen('s-p2');}
+    else if(scr==='s-res-holland'){calcHolland();}
+    else if(scr==='s-kuder'){renderKuder();showScreen('s-kuder');}
+    else if(scr==='s-res-kuder'){calcKuder();}
+    else{renderP1();showScreen('s-p1');}
+  } catch(e) { initFreshTest(nombre); }
+}
+
+async function saveSession(screen) {
+  if (!st.nombre) return;
+  try {
+    await store.set('session:' + toId(st.nombre), JSON.stringify({
+      screen, p1sel:Array.from(st.p1sel), p1pg:st.p1pg,
+      p2sel:st.p2sel, p2sec:st.p2sec, kSel:st.kSel, kPg:st.kPg,
+      hSc:st.hSc, kSc:st.kSc, savedAt:new Date().toISOString()
+    }));
+  } catch(e) { console.error('saveSession error:', e); }
+}
+
+async function savePatient() {
+  try {
+    const id = toId(st.nombre);
+    const sorted = Object.entries(st.hSc).sort((a,b)=>b[1]-a[1]);
+    const top3 = sorted.slice(0,3).map(x=>x[0]);
+    let habilitado = true;
+    try { const ex=await store.get('pac:'+id); if(ex){const ep=JSON.parse(ex.value);habilitado=ep.habilitado!==false;} }catch(_){}
+    await store.set('pac:' + id, JSON.stringify({
+      id, nombre:st.nombre, fecha:today(),
+      hSc:st.hSc, kSc:st.kSc, top3, habilitado, sinCompletar:false
+    }));
+    await store.set('session:' + id, JSON.stringify({screen:'s-cruzado', savedAt:new Date().toISOString()}));
+  } catch(e) { console.error('savePatient error:', e); }
+}
+
+async function exportAllPDF() {
+  const list = await store.list('pac:');
+  if (!list.keys.length) { alert('No hay pacientes guardados.'); return; }
+  const pats = [];
+  for (const k of list.keys) { try { const r=await store.get(k); if(r) pats.push(JSON.parse(r.value)); }catch(e){} }
+  const completados = pats.filter(p => !p.sinCompletar);
+  if (!completados.length) { alert('No hay pacientes con test completo para exportar.'); return; }
+  completados.sort((a,b)=>a.nombre.localeCompare(b.nombre));
+  let allHTML = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Todos los informes</title><style>body{font-family:Arial,sans-serif;font-size:12px;color:#2C3E4A;max-width:700px;margin:0 auto;padding:24px}.header{background:#2196C9;color:#fff;padding:14px 18px;border-radius:10px;margin-bottom:18px}.header h1{font-size:17px;margin:0 0 3px}.header p{font-size:11px;color:#B8DFF2;margin:0}h2{font-size:14px;color:#0C5E8A;margin:16px 0 7px;border-bottom:2px solid #E6F4FB;padding-bottom:4px}h2.green{color:#1A9155;border-bottom-color:#B2E8CB}h3{font-size:13px;margin:9px 0 4px}.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold;margin:2px;background:#E6F4FB;color:#0C5E8A}.badge-top{background:#2196C9;color:#fff}.sbar{margin:4px 0}.sbar-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px}.br{height:7px;background:#E6F4FB;border-radius:3px}.br-g{height:7px;background:#E8F8EF;border-radius:3px}.bf{height:7px;border-radius:3px}.cr{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #E6F4FB;font-size:11px}.footer{margin-top:24px;font-size:10px;color:#B0C4D4;text-align:center;border-top:1px solid #E6F4FB;padding-top:8px}.pb{page-break-after:always}</style></head><body>';
+  completados.forEach((p,idx) => {
+    const hs=p.hSc, ks=p.kSc||new Array(20).fill(0);
+    const sorted=Object.entries(hs).sort((a,b)=>b[1]-a[1]); const top3=sorted.slice(0,3).map(x=>x[0]); const maxH=Math.max(...Object.values(hs),1);
+    const kTop=ks.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0).slice(0,5);
+    const hC=rankH(hs).slice(0,12); const kC=rankK(ks).slice(0,12); const cC=rankC(hs,ks).slice(0,15); const maxC=Math.max(...cC.map(c=>c.sc),1);
+    allHTML += '<div class="header"><h1>Perfiles Profesionales y Áreas de Interés MF</h1><p>Orientación Vocacional · Santa Fe · '+p.fecha+'</p></div>';
+    allHTML += '<p><strong>Paciente:</strong> '+p.nombre+'</p>';
+    allHTML += '<h2>Test de Perfiles Profesionales</h2><p>'+top3.map((t,i)=>'<span class="badge'+(i===0?' badge-top':'')+'">'+( i+1)+'° '+RN[t]+' ('+hs[t]+')</span>').join(' ')+'</p>';
+    allHTML += sorted.map(([t,v])=>'<div class="sbar"><div class="sbar-row"><span>'+RN[t]+'</span><span>'+v+'</span></div><div class="br"><div class="bf" style="width:'+Math.round(v/maxH*100)+'%;background:#2196C9"></div></div></div>').join('');
+    allHTML += top3.map(t=>'<h3>'+RN[t]+'</h3><p style="font-size:11px;color:#5A7A8E;line-height:1.6">'+PERFILES[t].desc+'</p>').join('');
+    allHTML += '<h2>Carreras según Perfil</h2>'+hC.map((c,i)=>'<div class="cr"><span style="min-width:18px;color:#B0C4D4;font-weight:bold">'+(i+1)+'</span><div style="flex:1"><strong>'+c.n+'</strong> <span style="color:#B0C4D4;font-size:10px">'+c.i+'</span></div></div>').join('');
+    if (kTop.length) {
+      allHTML += '<h2 class="green">Escala de Áreas de Interés</h2>'+kTop.map(x=>'<div class="sbar"><div class="sbar-row"><span>'+KA[x.i]+'</span><span style="color:#1A9155;font-weight:bold">'+x.v+'/5</span></div><div class="br-g"><div class="bf" style="width:'+Math.round(x.v/kTop[0].v*100)+'%;background:#1A9155"></div></div></div>').join('');
+      allHTML += kTop.slice(0,3).map(x=>'<h3 style="color:#1A9155">'+KA[x.i]+'</h3><p style="font-size:11px;color:#5A7A8E;line-height:1.6">'+KD[x.i]+'</p>').join('');
+      allHTML += '<h2 class="green">Carreras según Áreas de Interés</h2>'+kC.map((c,i)=>'<div class="cr"><span style="min-width:18px;color:#B0C4D4;font-weight:bold">'+(i+1)+'</span><div style="flex:1"><strong>'+c.n+'</strong> <span style="color:#B0C4D4;font-size:10px">'+c.i+'</span></div></div>').join('');
+    }
+    allHTML += '<h2>Ranking Cruzado Final</h2>'+cC.map((c,i)=>'<div class="cr"><span style="min-width:18px;color:#B0C4D4;font-weight:bold">'+(i+1)+'</span><div style="flex:1"><strong>'+c.n+'</strong> <span style="color:#B0C4D4;font-size:10px">'+c.i+'</span></div><span style="font-weight:bold;color:#2196C9">'+Math.round(c.sc/maxC*100)+'%</span></div>').join('');
+    allHTML += '<div class="footer">Perfiles Profesionales MF · Santa Fe · '+p.fecha+'</div>';
+    if (idx < completados.length-1) allHTML += '<div class="pb"></div>';
+  });
+  allHTML += '</body></html>';
+  const win = window.open('','_blank');
+  if (win) { win.document.write(allHTML); win.document.close(); setTimeout(()=>win.print(),600); }
+  else alert('El navegador bloqueó la ventana. Permitir pop-ups e intentar de nuevo.');
+}
+
+// ─── MODAL GENÉRICO ───────────────────────────────────────────────────────────
+function showModal(html, cb) {
+  const ov = document.createElement('div');
+  ov.className = 'modal-overlay'; ov.id = 'modal-overlay';
+  const box = document.createElement('div');
+  box.className = 'modal-box'; box.innerHTML = html;
+  ov.appendChild(box); document.body.appendChild(ov);
+  if (cb) cb();
+}
+function closeModal() { const el = document.getElementById('modal-overlay'); if(el) el.remove(); }
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function toId(n) { return n.toLowerCase().replace(/\s+/g,'_'); }
+function today() { return new Date().toLocaleDateString('es-AR'); }
+
+// ─── LÓGICA DEL TEST ─────────────────────────────────────────────────────────
+function showScreen(id){
+  // Si intenta ir a una pantalla del test sin estar habilitado, bloquear
+  const testScreens = ['s-p1','s-p2','s-res-holland','s-kuder','s-res-kuder','s-cruzado'];
+  if(testScreens.includes(id) && !st.nombre){
+    showBlockedModal(); return;
+  }
+  if(testScreens.includes(id) && st.nombre){
+    // Verificar habilitación en tiempo real antes de mostrar cualquier pantalla del test
+    store.get('pac:'+toId(st.nombre)).then(r=>{
+      if(!r){ showBlockedModal(); return; }
+      const p = JSON.parse(r.value);
+      if(p.habilitado===false){ st.nombre=''; showBlockedModal(); return; }
+      // Habilitado — mostrar pantalla
+      document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+      const el=document.getElementById(id); if(el) el.classList.add('active');
+    }).catch(()=>{
+      // Error de conexión — no dejar pasar
+      showBlockedModal();
+    });
+    return;
+  }
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id); if(el) el.classList.add('active');
+}
+function switchHomeTab(){}
+function switchTab2(show,el,hide){document.getElementById(show).style.display='block';document.getElementById(hide).style.display='none';el.closest('.tab-bar').querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));el.classList.add('on');}
+function switchTab2G(show,el,hide){document.getElementById(show).style.display='block';document.getElementById(hide).style.display='none';el.closest('.tab-green-bar').querySelectorAll('.tab-green').forEach(x=>x.classList.remove('on'));el.classList.add('on');}
+function switchDetTab(show,el){['dd-holland','dd-kuder','dd-cruzado'].forEach(id=>document.getElementById(id).style.display='none');document.getElementById(show).style.display='block';el.closest('.tab-bar').querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));el.classList.add('on');}
+
+// startTest handled above
+function renderP1(){
+  const pg=st.p1pg,s=pg*30,e=Math.min(s+30,90);
+  document.getElementById('p1-ttl').textContent='Oraciones '+(s+1)+'–'+e;
+  document.getElementById('p1-prog').style.width=((pg+1)/3*16)+'%';
+  document.getElementById('p1-back').textContent=pg===0?'Cancelar':'Atrás';
+  const sel=Array.from(st.p1sel).filter(n=>n>=s+1&&n<=e).length;
+  document.getElementById('p1-cnt').textContent=sel>0?sel+' seleccionadas':'';
+  const c=document.getElementById('or-container');c.innerHTML='';
+  for(let i=s;i<e;i++){
+    const div=document.createElement('div');div.className='or-item'+(st.p1sel.has(i+1)?' sel':'');
+    div.innerHTML='<span class="or-num">'+(i+1)+'</span><span class="or-txt">'+ORACIONES[i]+'</span><div class="or-circle"></div>';
+    div.onclick=()=>{st.p1sel.has(i+1)?st.p1sel.delete(i+1):st.p1sel.add(i+1);div.classList.toggle('sel');const s2=document.getElementById('or-container').querySelectorAll('.or-item.sel').length;document.getElementById('p1-cnt').textContent=s2>0?s2+' seleccionadas':'';}; 
+    c.appendChild(div);
+  }
+}
+function p1Back(){if(st.p1pg===0){goHome();return;}st.p1pg--;renderP1();}
+function p1Next(){if(st.p1pg<2){st.p1pg++;renderP1();saveSession('s-p1');}else{renderP2();showScreen('s-p2');saveSession('s-p2');}}
+
+const P2S=[{k:'F',l:'Fortalezas',d:FORT,p:20},{k:'V',l:'Valores',d:VALS,p:24},{k:'Ap',l:'Aptitudes',d:APTS,p:28},{k:'Am',l:'Ambientes',d:AMBS,p:32}];
+function renderP2(){
+  const sec=P2S[st.p2sec];
+  document.getElementById('p2-ttl').textContent=sec.l;document.getElementById('p2-prog').style.width=sec.p+'%';
+  const c=document.getElementById('p2-cont');c.innerHTML='';
+  const g=document.createElement('div');g.className='rcols';
+  ['R','I','A','S','E','C'].forEach(t=>{
+    const col=document.createElement('div');col.className='card';col.style.padding='8px';
+    const h=document.createElement('div');h.className='col-hdr';h.textContent=RN[t];col.appendChild(h);
+    (sec.d[t]||[]).forEach(item=>{
+      const key=t+'_'+item;const ci=document.createElement('div');ci.className='chk'+(st.p2sel[sec.k][key]?' on':'');
+      ci.innerHTML='<div class="chk-box"><span class="chk-mk">✓</span></div><span>'+item+'</span>';
+      ci.onclick=()=>{st.p2sel[sec.k][key]?delete st.p2sel[sec.k][key]:st.p2sel[sec.k][key]=t;ci.classList.toggle('on');};
+      col.appendChild(ci);
+    });
+    g.appendChild(col);
+  });
+  c.appendChild(g);
+}
+function p2Back(){if(st.p2sec===0){st.p1pg=2;renderP1();showScreen('s-p1');}else{st.p2sec--;renderP2();}}
+function p2Next(){if(st.p2sec<3){st.p2sec++;renderP2();saveSession('s-p2');}else{calcHolland();}}
+
+function calcHolland(){
+  const hs={R:0,I:0,A:0,S:0,E:0,C:0};
+  st.p1sel.forEach(n=>{hs[OR_T[n-1]]++;});
+  ['F','V','Ap','Am'].forEach(sec=>{Object.values(st.p2sel[sec]).forEach(t=>{hs[t]++;});});
+  st.hSc=hs;
+  const sorted=Object.entries(hs).sort((a,b)=>b[1]-a[1]);const top3=sorted.slice(0,3).map(x=>x[0]);
+  document.getElementById('rh-name').textContent='Perfil: '+top3.map(t=>RN[t]).join(' · ');
+  const bd=document.getElementById('rh-badges');bd.innerHTML='';
+  top3.forEach((t,i)=>{const sp=document.createElement('span');sp.className='badge'+(i===0?' badge-top':'');sp.textContent=(i+1)+'° '+RN[t]+' ('+hs[t]+')';bd.appendChild(sp);});
+  const maxH=Math.max(...Object.values(hs),1);
+  document.getElementById('rh-scores').innerHTML=sorted.map(([t,v])=>'<div class="sbar"><div class="sbar-row"><span>'+RN[t]+'</span><span>'+v+'</span></div><div class="sbar-bg"><div class="sbar-fill" style="width:'+Math.round(v/maxH*100)+'%;background:'+RC[t]+'"></div></div></div>').join('');
+  document.getElementById('rh-perfiles').innerHTML=top3.map(t=>'<div class="card"><span class="badge badge-top" style="margin-bottom:6px">'+RN[t]+'</span><p class="pdesc">'+PERFILES[t].desc+'</p><p style="font-size:11px;color:var(--gray3);margin-top:5px"><strong style="color:var(--sky4)">Ambientes:</strong> '+PERFILES[t].ambientes+'</p><p style="font-size:11px;color:var(--gray3);margin-top:3px"><strong style="color:var(--sky4)">Aptitudes:</strong> '+PERFILES[t].aptitudes+'</p></div>').join('');
+  const rhC=rankH(hs).slice(0,18);const maxC=Math.max(...rhC.map(c=>c.sc),1);
+  document.getElementById('rh-career-list').innerHTML=rhC.map((c,i)=>'<div class="career-item"><span class="c-rank">'+(i+1)+'</span><div style="flex:1"><div class="c-name">'+c.n+'</div><div class="c-inst">'+c.i+'</div></div><div class="c-bar" style="width:'+Math.max(Math.round(c.sc/maxC*80),4)+'px"></div><span class="c-pct">'+Math.round(c.sc/maxC*100)+'%</span></div>').join('');
+  if(st.radarH)st.radarH.destroy();
+  setTimeout(()=>{const ctx=document.getElementById('radarH').getContext('2d');st.radarH=new Chart(ctx,{type:'radar',data:{labels:['Realista','Investigador','Artístico','Social','Emprendedor','Convencional'],datasets:[{label:'Perfil',data:['R','I','A','S','E','C'].map(t=>hs[t]),backgroundColor:'rgba(33,150,201,0.15)',borderColor:'#2196C9',borderWidth:2,pointBackgroundColor:'#2196C9',pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{r:{beginAtZero:true,ticks:{stepSize:2,font:{size:9}},pointLabels:{font:{size:10}}}}}});},120);
+  showScreen('s-res-holland');
+}
+
+function rankH(hs){return CARRERAS.map(c=>{let sc=0;c.h.forEach((t,i)=>{sc+=(hs[t]||0)*(i===0?3:i===1?2:1);});return Object.assign({},c,{sc});}).filter(c=>c.sc>0).sort((a,b)=>b.sc-a.sc);}
+function rankK(ks){return CARRERAS.map(c=>{let sc=0;c.k.forEach((ki,i)=>{sc+=(ks[ki]||0)*(i===0?3:i===1?2:1)*2;});return Object.assign({},c,{sc});}).filter(c=>c.sc>0).sort((a,b)=>b.sc-a.sc);}
+function rankC(hs,ks){return CARRERAS.map(c=>{let sc=0;c.h.forEach((t,i)=>{sc+=(hs[t]||0)*(i===0?3:i===1?2:1);});c.k.forEach((ki,i)=>{sc+=(ks[ki]||0)*(i===0?3:i===1?2:1)*2;});return Object.assign({},c,{sc});}).filter(c=>c.sc>0).sort((a,b)=>b.sc-a.sc);}
+
+function goToKuder(){st.kPg=0;renderKuder();showScreen('s-kuder');}
+function renderKuder(){
+  const pg=st.kPg;const sn=['A','B','C','D','E'];
+  document.getElementById('k-ttl').textContent='Serie '+sn[pg];
+  document.getElementById('k-serie-lbl').textContent='Serie '+sn[pg]+' de 5';
+  document.getElementById('k-prog').style.width=(50+pg*6)+'%';
+  document.getElementById('warn-k').style.display='none';
+  if(!st.kSel[pg])st.kSel[pg]=[];
+  updateKuderUI();
+  const c=document.getElementById('k-opts');c.innerHTML='';
+  KS[pg].forEach((txt,i)=>{
+    const div=document.createElement('div');
+    const isSel=st.kSel[pg].includes(i);
+    const isMax=st.kSel[pg].length>=2&&!isSel;
+    div.className='kuder-opt'+(isSel?' sel':isMax?' maxed':'');
+    div.innerHTML='<span class="k-num">'+(i+1)+'.</span><div class="k-circle"><span class="k-check">✓</span></div><span>'+txt+'</span>';
+    div.onclick=()=>{
+      const idx=st.kSel[pg].indexOf(i);
+      if(idx>=0){st.kSel[pg].splice(idx,1);}
+      else{if(st.kSel[pg].length>=2)return;st.kSel[pg].push(i);}
+      refreshKuderOpts(pg);updateKuderUI();
+    };
+    c.appendChild(div);
+  });
+}
+function refreshKuderOpts(pg){
+  const opts=document.getElementById('k-opts').querySelectorAll('.kuder-opt');
+  opts.forEach((div,i)=>{const isSel=st.kSel[pg].includes(i);const isMax=st.kSel[pg].length>=2&&!isSel;div.className='kuder-opt'+(isSel?' sel':isMax?' maxed':'');});
+}
+function updateKuderUI(){
+  const pg=st.kPg;const count=st.kSel[pg]?st.kSel[pg].length:0;
+  document.getElementById('k-sel-count').textContent=count+' / 2 seleccionadas';
+  const banner=document.getElementById('max-banner');banner.className='max-banner'+(count===2?' show':'');
+}
+function kBack(){if(st.kPg===0){showScreen('s-res-holland');}else{st.kPg--;renderKuder();}}
+function kNext(){
+  if(!st.kSel[st.kPg]||st.kSel[st.kPg].length!==2){document.getElementById('warn-k').style.display='block';return;}
+  if(st.kPg<4){st.kPg++;renderKuder();saveSession('s-kuder');}else{calcKuder();}
+}
+function calcKuder(){
+  const ks=new Array(20).fill(0);st.kSel.forEach(s=>s.forEach(i=>{ks[i]++;}));st.kSc=ks;
+  const kTop=ks.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0).slice(0,6);
+  const maxK=Math.max(...ks,1);
+  document.getElementById('rk-scores').innerHTML=kTop.map(x=>'<div class="sbar"><div class="sbar-row"><span style="color:var(--gr5)">'+KA[x.i]+'</span><span style="color:var(--gr4);font-weight:700">'+x.v+'/5</span></div><div class="sbar-bg-green"><div class="sbar-fill" style="width:'+Math.round(x.v/maxK*100)+'%;background:var(--gr4)"></div></div></div>').join('');
+  document.getElementById('rk-descs').innerHTML=kTop.slice(0,3).map(x=>'<div class="card-green"><h3 style="color:var(--gr5)">'+KA[x.i]+'</h3><p class="pdesc">'+KD[x.i]+'</p></div>').join('');
+  const rkC=rankK(ks).slice(0,18);const maxC=Math.max(...rkC.map(c=>c.sc),1);
+  document.getElementById('rk-career-list').innerHTML=rkC.map((c,i)=>'<div class="career-item"><span class="c-rank">'+(i+1)+'</span><div style="flex:1"><div class="c-name">'+c.n+'</div><div class="c-inst">'+c.i+'</div></div><div class="c-bar" style="width:'+Math.max(Math.round(c.sc/maxC*80),4)+'px;background:var(--gr4)"></div><span class="c-pct" style="color:var(--gr4)">'+Math.round(c.sc/maxC*100)+'%</span></div>').join('');
+  showScreen('s-res-kuder');
+}
+function goToCruzado(){
+  const sorted=Object.entries(st.hSc).sort((a,b)=>b[1]-a[1]);const top3=sorted.slice(0,3).map(x=>x[0]);
+  const kTop=st.kSc.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0).slice(0,3);
+  document.getElementById('cruz-name').textContent='Ranking cruzado — '+st.nombre;
+  const bd=document.getElementById('cruz-badges');bd.innerHTML='';
+  top3.forEach(t=>{const sp=document.createElement('span');sp.className='badge badge-top';sp.textContent=RN[t];bd.appendChild(sp);});
+  kTop.forEach(x=>{const sp=document.createElement('span');sp.className='badge badge-k';sp.textContent=KA[x.i];bd.appendChild(sp);});
+  const ranked=rankC(st.hSc,st.kSc).slice(0,20);const maxC=Math.max(...ranked.map(c=>c.sc),1);
+  document.getElementById('cruz-careers').innerHTML=ranked.map((c,i)=>'<div class="career-item"><span class="c-rank">'+(i+1)+'</span><div style="flex:1"><div class="c-name">'+c.n+'</div><div class="c-inst">'+c.i+'</div></div><div class="c-bar" style="width:'+Math.max(Math.round(c.sc/maxC*80),4)+'px"></div><span class="c-pct">'+Math.round(c.sc/maxC*100)+'%</span></div>').join('');
+  savePatient();showScreen('s-cruzado');
+}
+
+function calcHollandAndShow(){calcHolland();}
+
+// Patch calcHolland and calcKuder to save session
+const _origCalcHolland = calcHolland;
+calcHolland = function(){_origCalcHolland();saveSession('s-res-holland');};
+const _origCalcKuder = calcKuder;
+calcKuder = function(){_origCalcKuder();saveSession('s-res-kuder');};
+
+// goToCruzado handled above
+
+function buildPDF(nombre,fecha,hs,ks,tipo){
+  const sorted=Object.entries(hs).sort((a,b)=>b[1]-a[1]);const top3=sorted.slice(0,3).map(x=>x[0]);const maxH=Math.max(...Object.values(hs),1);
+  const kTop=ks.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0).slice(0,5);
+  const hC=rankH(hs).slice(0,12);const kC=rankK(ks).slice(0,12);const cC=rankC(hs,ks).slice(0,15);const maxC=Math.max(...cC.map(c=>c.sc),1);
+  const html='<!DOCTYPE html><html><head><meta charset="utf-8"><title>Informe - '+nombre+'</title><style>body{font-family:Arial,sans-serif;font-size:12px;color:#2C3E4A;max-width:700px;margin:0 auto;padding:24px}.header{background:#2196C9;color:#fff;padding:14px 18px;border-radius:10px;margin-bottom:18px}.header h1{font-size:17px;margin:0 0 3px}.header p{font-size:11px;color:#B8DFF2;margin:0}h2{font-size:14px;color:#0C5E8A;margin:16px 0 7px;border-bottom:2px solid #E6F4FB;padding-bottom:4px}h2.green{color:#1A9155;border-bottom-color:#B2E8CB}h3{font-size:13px;margin:9px 0 4px}.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold;margin:2px;background:#E6F4FB;color:#0C5E8A}.badge-top{background:#2196C9;color:#fff}.sbar{margin:4px 0}.sbar-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px}.br{height:7px;background:#E6F4FB;border-radius:3px}.br-g{height:7px;background:#E8F8EF;border-radius:3px}.bf{height:7px;border-radius:3px}.cr{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #E6F4FB;font-size:11px}.footer{margin-top:24px;font-size:10px;color:#B0C4D4;text-align:center;border-top:1px solid #E6F4FB;padding-top:8px}</style></head><body>'
+  +'<div class="header"><h1>Perfiles Profesionales y Áreas de Interés Profesional MF</h1><p>Informe de Orientación Vocacional · Santa Fe · '+fecha+'</p></div>'
+  +'<p><strong>Paciente:</strong> '+nombre+'</p>'
+  +(tipo!=='kuder'?'<h2>Test de Perfiles Profesionales</h2><p>'+top3.map((t,i)=>'<span class="badge'+(i===0?' badge-top':'')+'">'+( i+1)+'° '+RN[t]+' ('+hs[t]+')</span>').join(' ')+'</p>'+sorted.map(([t,v])=>'<div class="sbar"><div class="sbar-row"><span>'+RN[t]+'</span><span>'+v+'</span></div><div class="br"><div class="bf" style="width:'+Math.round(v/maxH*100)+'%;background:#2196C9"></div></div></div>').join('')+top3.map(t=>'<h3>'+RN[t]+'</h3><p style="font-size:11px;color:#5A7A8E;line-height:1.6">'+PERFILES[t].desc+'</p>').join('')+'<h2>Carreras según Perfil Profesional</h2>'+hC.map((c,i)=>'<div class="cr"><span style="min-width:18px;color:#B0C4D4;font-weight:bold">'+(i+1)+'</span><div style="flex:1"><strong>'+c.n+'</strong> <span style="color:#B0C4D4;font-size:10px">'+c.i+'</span></div></div>').join(''):'')
+  +(tipo!=='holland'&&kTop.length?'<h2 class="green">Escala de Áreas de Interés Profesional</h2>'+kTop.map(x=>'<div class="sbar"><div class="sbar-row"><span>'+KA[x.i]+'</span><span style="color:#1A9155;font-weight:bold">'+x.v+'/5</span></div><div class="br-g"><div class="bf" style="width:'+Math.round(x.v/kTop[0].v*100)+'%;background:#1A9155"></div></div></div>').join('')+kTop.slice(0,3).map(x=>'<h3 style="color:#1A9155">'+KA[x.i]+'</h3><p style="font-size:11px;color:#5A7A8E;line-height:1.6">'+KD[x.i]+'</p>').join('')+'<h2 class="green">Carreras según Áreas de Interés</h2>'+kC.map((c,i)=>'<div class="cr"><span style="min-width:18px;color:#B0C4D4;font-weight:bold">'+(i+1)+'</span><div style="flex:1"><strong>'+c.n+'</strong> <span style="color:#B0C4D4;font-size:10px">'+c.i+'</span></div></div>').join(''):'')
+  +(tipo==='completo'?'<h2>Ranking Cruzado Final · Perfiles + Áreas de Interés</h2><p style="font-size:11px;color:#5A7A8E;margin-bottom:8px">Carreras disponibles en Santa Fe · Ordenadas por afinidad cruzada</p>'+cC.map((c,i)=>'<div class="cr"><span style="min-width:18px;color:#B0C4D4;font-weight:bold">'+(i+1)+'</span><div style="flex:1"><strong>'+c.n+'</strong> <span style="color:#B0C4D4;font-size:10px">'+c.i+'</span></div><span style="font-weight:bold;color:#2196C9">'+Math.round(c.sc/maxC*100)+'%</span></div>').join(''):'')
+  +'<div class="footer">Perfiles Profesionales y Áreas de Interés Profesional MF · Orientación Vocacional Santa Fe · '+fecha+'</div></body></html>';
+  const win=window.open('','_blank');if(win){win.document.write(html);win.document.close();setTimeout(()=>win.print(),500);}
+}
+function exportPDFHolland(){buildPDF(st.nombre,new Date().toLocaleDateString('es-AR'),st.hSc,st.kSc,'holland');}
+function exportPDFKuder(){buildPDF(st.nombre,new Date().toLocaleDateString('es-AR'),st.hSc,st.kSc,'kuder');}
+function exportPDFCompleto(){buildPDF(st.nombre,new Date().toLocaleDateString('es-AR'),st.hSc,st.kSc,'completo');}
+function exportPDFFromDetail(){if(!st.currentPat)return;const p=st.currentPat;buildPDF(p.nombre,p.fecha,p.hSc,p.kSc||new Array(20).fill(0),'completo');}
+function goHome(){document.getElementById('nombre-input').value='';showScreen('s-home');}
+
+function switchTab2(show,el,hide){document.getElementById(show).style.display='block';document.getElementById(hide).style.display='none';el.closest('.tab-bar').querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));el.classList.add('on');}
+function switchTab2G(show,el,hide){document.getElementById(show).style.display='block';document.getElementById(hide).style.display='none';el.closest('.tab-green-bar').querySelectorAll('.tab-green').forEach(x=>x.classList.remove('on'));el.classList.add('on');}
+function switchDetTab(show,el){['dd-holland','dd-kuder','dd-cruzado'].forEach(id=>document.getElementById(id).style.display='none');document.getElementById(show).style.display='block';el.closest('.tab-bar').querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));el.classList.add('on');}
+function rankH(hs){return CARRERAS.map(c=>{let sc=0;c.h.forEach((t,i)=>{sc+=(hs[t]||0)*(i===0?3:i===1?2:1);});return Object.assign({},c,{sc});}).filter(c=>c.sc>0).sort((a,b)=>b.sc-a.sc);}
+function rankK(ks){return CARRERAS.map(c=>{let sc=0;c.k.forEach((ki,i)=>{sc+=(ks[ki]||0)*(i===0?3:i===1?2:1)*2;});return Object.assign({},c,{sc});}).filter(c=>c.sc>0).sort((a,b)=>b.sc-a.sc);}
+function rankC(hs,ks){return CARRERAS.map(c=>{let sc=0;c.h.forEach((t,i)=>{sc+=(hs[t]||0)*(i===0?3:i===1?2:1);});c.k.forEach((ki,i)=>{sc+=(ks[ki]||0)*(i===0?3:i===1?2:1)*2;});return Object.assign({},c,{sc});}).filter(c=>c.sc>0).sort((a,b)=>b.sc-a.sc);}
+</script>
+</body>
+</html>
